@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Todo List</title>
+  <link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body>
+  <div class="box"><h1>TODO List</h1></div>
+  <div class="box">
+    <% ejes.forEach(task => { %>
+      <div class="item">
+        <div class="task-content">
+          <input type="checkbox" />
+          <p id="text-<%= task._id %>"><%= task.name %></p>
+          <form id="form-<%= task._id %>" action="/edit" method="post" style="display: none;" class="edit-form">
+            <input type="hidden" name="editId" value="<%= task._id %>">
+            <input type="text" name="updatedText" value="<%= task.name %>" class="inline-edit-input" />
+            <button type="submit" class="save-btn">Save</button>
+          </form>
+        </div>
+        <div class="task-actions">
+          <button type="button" onclick="startEdit('<%= task._id %>')" class="edit-btn">Edit</button>
+          <form action="/delete" method="post">
+            <input type="hidden" name="deleteId" value="<%= task._id %>">
+            <button type="submit" class="delete-btn">Delete</button>
+          </form>
+        </div>
+      </div>
+    <% }); %>
+    <form action="/" method="post">
+      <input type="text" name="ele1" placeholder="Enter the task" required />
+      <button type="submit" class="sub">+</button>
+    </form>
+  </div>
+
+  <footer>
+    <p>&copy;  2025 All rights reserved.</p>
+  </footer>
+
+  <script>
+    function startEdit(id) {
+      document.getElementById("text-" + id).style.display = "none";
+      document.getElementById("form-" + id).style.display = "flex";
+    }
+  </script>
+</body>
+</html>
