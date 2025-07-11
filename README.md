@@ -19,7 +19,4 @@ A clean and simple Todo List web application built using **Node.js**, **Express*
 - Data saved permanently using MongoDB
 - Responsive and user-friendly design
 
----
-
-## 📁 Project Structure
 
