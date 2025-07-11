@@ -6,7 +6,7 @@ app.set("view engine", "ejs");
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 
-mongoose.connect("mongodb://localhost:27017/todoo");
+mongoose.connect("mongodb+srv://abdullahsmsiddiqui:8CX78aGHPZAUDmwm@cluster0.hq7hh8u.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0");
 
 const taskSchema = new mongoose.Schema({
   name: String
