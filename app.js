@@ -1,10 +1,13 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const methodOverride = require("method-override");
+
 const app = express();
 
 app.set("view engine", "ejs");
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
+app.use(methodOverride("_method"));
 
 mongoose.connect("mongodb+srv://abdullahsmsiddiqui:8CX78aGHPZAUDmwm@cluster0.hq7hh8u.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0");
 
@@ -31,17 +34,16 @@ app.post("/", function(req, res) {
   });
 });
 
-app.post("/edit", function(req, res) {
-  const editId = req.body.editId;
-  const updatedText = req.body.updatedText;
-  Task.findByIdAndUpdate(editId, { name: updatedText }, function(err) {
+// Use PUT for updating
+app.put("/edit/:id", function(req, res) {
+  Task.findByIdAndUpdate(req.params.id, { name: req.body.updatedText }, function(err) {
     res.redirect("/");
   });
 });
 
-app.post("/delete", function(req, res) {
-  const deleteId = req.body.deleteId;
-  Task.findByIdAndDelete(deleteId, function(err) {
+// Use DELETE for deleting
+app.delete("/delete/:id", function(req, res) {
+  Task.findByIdAndDelete(req.params.id, function(err) {
     res.redirect("/");
   });
 });
