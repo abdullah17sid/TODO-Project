@@ -13,22 +13,21 @@
         <div class="task-content">
           <input type="checkbox" />
           <p id="text-<%= task._id %>"><%= task.name %></p>
-          <form id="form-<%= task._id %>" action="/edit" method="post" style="display: none;" class="edit-form">
-            <input type="hidden" name="editId" value="<%= task._id %>">
-            <input type="text" name="updatedText" value="<%= task.name %>" class="inline-edit-input" />
+          <form id="form-<%= task._id %>" action="/edit/<%= task._id %>?_method=PUT" method="POST" style="display: none;" class="edit-form">
+            <input type="text" name="updatedText" value="<%= task.name %>" class="inline-edit-input" required />
             <button type="submit" class="save-btn">Save</button>
           </form>
         </div>
         <div class="task-actions">
           <button type="button" onclick="startEdit('<%= task._id %>')" class="edit-btn">Edit</button>
-          <form action="/delete" method="post">
-            <input type="hidden" name="deleteId" value="<%= task._id %>">
+          <form action="/delete/<%= task._id %>?_method=DELETE" method="POST">
             <button type="submit" class="delete-btn">Delete</button>
           </form>
         </div>
       </div>
     <% }); %>
-    <form action="/" method="post">
+
+    <form action="/" method="POST">
       <input type="text" name="ele1" placeholder="Enter the task" required />
       <button type="submit" class="sub">+</button>
     </form>
